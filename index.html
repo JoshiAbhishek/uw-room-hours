@@ -60,7 +60,7 @@
                     </a>
                 </div>
             </div>
-            <div>
+            <div id="tableWrapper">
                 <div class="table-responsive">
                     <table id="weekTable" class="table">
                         <thead class="thead-dark">
@@ -998,6 +998,42 @@
     </div>
 
     <script>
+        $(document).ready(function () {
+            var todayDate = new Date();
+            var todayDayOfWeek = todayDate.getDay();
+            var todayHours = todayDate.getHours();
+            var todayMinutes = todayDate.getMinutes();
+
+            var table = document.getElementById("weekTable");
+            var rows = table.getElementsByTagName("tr");
+
+            for (let z = 1; z < rows.length; z++) {
+                rows[z].cells[todayDayOfWeek].querySelector("div.hourDayCell").style.backgroundColor = "#003300";
+            }
+
+            if(todayHours > 6) {
+                var rowOffset = $(document.getElementById(todayHours + "row")).offset().top;
+
+                rowOffset += todayMinutes;
+
+                var tableLeftOffset = $(table).offset();
+
+                var hourLine = document.createElement("div");
+                hourLine.style.height = "2px";
+                hourLine.style.backgroundColor = "#00e600";
+                hourLine.style.width = table.style.width;
+                hourLine.style.zIndex = 2;
+                hourLine.id = "hourLine";
+
+                console.log(rowOffset);
+                console.log(tableLeftOffset);
+
+                $("#tableWrapper").append(hourLine);
+
+                $("#hourLine").offset({top: rowOffset, left: tableLeftOffset.left});
+            }
+        });
+
         var numsToDaysEnum = Object.freeze({
             1: "Monday",
             2: "Tuesday",
@@ -1106,6 +1142,8 @@
         $("#searchButton").on("click", function (e) {
             e.preventDefault();
 
+            $(".timeCellItem").remove();
+
             var buildingInput = $("#buildingInput").val().trim();
             var roomInput = $("#buildingRoomInput").val().trim();
 
@@ -1170,12 +1208,35 @@
                                     }
 
                                     if (id != undefined && id != null && id != "") {
+                                        var time = "";
+                                        if (startHour > 12) {
+                                            time += startHour - 12 + ":" + startMinute + " pm";
+                                        }
+                                        else if (startHour == 12) {
+                                            time += startHour + ":" + startMinute + " pm";
+                                        }
+                                        else {
+                                            time += startHour + ":" + startMinute + " am";
+                                        }
+
+                                        time += " - ";
+
+                                        if (endHour > 12) {
+                                            time += endHour - 12 + ":" + endMinute + " pm";
+                                        }
+                                        else if (endHour == 12) {
+                                            time += endHour + ":" + endMinute + " pm";
+                                        }
+                                        else {
+                                            time += endHour + ":" + endMinute + " am";
+                                        }
+
                                         $("#" + id).attr("data-container", "body");
                                         $("#" + id).attr("data-toggle", "popover");
                                         $("#" + id).attr("data-html", "true");
                                         $("#" + id).attr("title", roomDayCoursesData[x]["title"]);
 
-                                        $("#" + id).attr("data-content", "<div><p>SLN: " + roomDayCoursesData[x]["sln"] + "</p><p>Alias: " + roomDayCoursesData[x]["alias"] + "</p><a target='_blank' href='" + roomDayCoursesData[x]["catalogURL"] + "'>Catalog URL</a></div>");
+                                        $("#" + id).attr("data-content", "<div><p>SLN: " + roomDayCoursesData[x]["sln"] + "</p><p>Alias: " + roomDayCoursesData[x]["alias"] + "</p><p>Time: " + time + "</p><a target='_blank' href='" + roomDayCoursesData[x]["catalogURL"] + "'>Catalog URL</a></div>");
 
                                         $("#" + id).on("mouseover", function (e) {
                                             $(".popover").each(function () {

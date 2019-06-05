@@ -13,7 +13,7 @@ tr.hourRow td {
 }
 
 div.hourDayCell {
-    background-color: lightgray !important;
+    background-color: lightgray;
     height: inherit;
     padding: 0em !important;
     margin: 0em !important;
