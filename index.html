@@ -59,6 +59,10 @@
                         Go
                     </a>
                 </div>
+                <p>Possible Rooms: </p>
+                <ul id="possibleRooms" class="mb-3">
+                    
+                </ul>
             </div>
             <div id="tableWrapper">
                 <div class="table-responsive">
@@ -1143,6 +1147,7 @@
             e.preventDefault();
 
             $(".timeCellItem").remove();
+            $("#possibleRooms > li").remove();
 
             var buildingInput = $("#buildingInput").val().trim();
             var roomInput = $("#buildingRoomInput").val().trim();
@@ -1246,6 +1251,19 @@
                                         });
                                     }
                                 }
+                            }
+                        }
+                    }
+                    else {
+                        var buildingRooms = Object.keys(tsmap[buildingInput]);
+
+                        for(let x = 0; x < buildingRooms.length; x++) {
+                            if(buildingRooms[x].startsWith(roomInput)) {
+                                var li = document.createElement("li");
+
+                                li.textContent = buildingRooms[x];
+
+                                $("#possibleRooms").append(li);
                             }
                         }
                     }
