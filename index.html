@@ -1,0 +1,1206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="text/javascript" src="tsmap.js"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <title>UW Building Room Hours</title>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <div class="container-fluid">
+            <h1 class="mb-4">UW Building Room Hours</h1>
+            <h5>View the weekly schedule of a room at the University of Washington - Seattle according to the given
+                quarter's Time Schedule data.</h5>
+            <p>To get the parsed data, follow the instructions on the README.</p>
+        </div>
+    </div>
+
+    <div class="jumbotron">
+        <div class="container-fluid">
+            <div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="buildingInput">Building Alias</label>
+                        <input id="buildingInput" name="buildingInput" type="text" class="form-control"
+                            placeholder="ex) MGH, JHN, ...">
+                    </div>
+                    <div class="col">
+                        <label for="buildingRoomInput">Building Room</label>
+                        <input id="buildingRoomInput" name="buildingRoomInput" type="text" class="form-control"
+                            placeholder="ex) 430, 111, ...">
+                    </div>
+                </div>
+                <div class="mt-3 mb-3">
+                    <a id="searchButton" href="#" class="btn btn-primary">
+                        Go
+                    </a>
+                </div>
+            </div>
+            <div>
+                <div class="table-responsive">
+                    <table id="weekTable" class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" class="text-center">Hour</th>
+                                <th scope="col" class="text-center">Monday</th>
+                                <th scope="col" class="text-center">Tuesday</th>
+                                <th scope="col" class="text-center">Wednesday</th>
+                                <th scope="col" class="text-center">Thursday</th>
+                                <th scope="col" class="text-center">Friday</th>
+                                <th scope="col" class="text-center">Saturday</th>
+                                <th scope="col" class="text-center">Sunday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--
+                            <tr id="0row" class="hourRow">
+                                <th scope="row" class="text-center">12 AM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="1row" class="hourRow">
+                                <th scope="row" class="text-center">1 AM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="2row" class="hourRow">
+                                <th scope="row" class="text-center">2 AM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="3row" class="hourRow">
+                                <th scope="row" class="text-center">3 AM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="4row" class="hourRow">
+                                <th scope="row" class="text-center">4 AM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="5row" class="hourRow">
+                                <th scope="row" class="text-center">5 AM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                        -->
+                            <tr id="6row" class="hourRow">
+                                <th scope="row" class="text-center">6 AM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="7row" class="hourRow">
+                                <th scope="row" class="text-center">7 AM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="8row" class="hourRow">
+                                <th scope="row" class="text-center">8 AM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="9row" class="hourRow">
+                                <th scope="row" class="text-center">9 AM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="10row" class="hourRow">
+                                <th scope="row" class="text-center">10 AM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="11row" class="hourRow">
+                                <th scope="row" class="text-center">11 AM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="12row" class="hourRow">
+                                <th scope="row" class="text-center">12 PM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="13row" class="hourRow">
+                                <th scope="row" class="text-center">1 PM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="14row" class="hourRow">
+                                <th scope="row" class="text-center">2 PM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="15row" class="hourRow">
+                                <th scope="row" class="text-center">3 PM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="16row" class="hourRow">
+                                <th scope="row" class="text-center">4 PM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="17row" class="hourRow">
+                                <th scope="row" class="text-center">5 PM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="18row" class="hourRow">
+                                <th scope="row" class="text-center">6 PM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="19row" class="hourRow">
+                                <th scope="row" class="text-center">7 PM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="20row" class="hourRow">
+                                <th scope="row" class="text-center">8 PM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="21row" class="hourRow">
+                                <th scope="row" class="text-center">9 PM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="22row" class="hourRow">
+                                <th scope="row" class="text-center">10 PM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="23row" class="hourRow">
+                                <th scope="row" class="text-center">11 PM</th>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hourDayCell">
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var numsToDaysEnum = Object.freeze({
+            1: "Monday",
+            2: "Tuesday",
+            3: "Wednesday",
+            4: "Thursday",
+            5: "Friday",
+            6: "Saturday",
+            7: "Sunday"
+        });
+
+        var daysToNumsEnum = Object.freeze({
+            "Monday": 1,
+            "Tuesday": 2,
+            "Wednesday": 3,
+            "Thursday": 4,
+            "Friday": 5,
+            "Saturday": 6,
+            "Sunday": 7
+        });
+
+        var colors = ["Tomato", "Yellow", "Brown", "Orange", "DodgerBlue", "MediumSeaGreen", "SlateBlue", "Violet", "DarkGreen", "Cyan", "Gold", "GreenYellow", "LightCoral", "AntiqueWhite", "SpringGreen", "LightPink", "GreenYellow", "Lavender"];
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+        }
+
+        function getRandomColor() {
+            return colors[getRandomInt(0, colors.length)];
+        }
+
+        var colorIndex = getRandomInt(0, colors.length);
+        function getRandomColorStepwise() {
+            colorIndex += 1;
+
+            if (colorIndex == colors.length) {
+                colorIndex = 0;
+            }
+
+            return colors[colorIndex];
+        }
+
+        function getHour(time) {
+            if (typeof time === "number") {
+                time = time + '';
+            }
+
+            if (time.length < 4) {
+                return Number(time.charAt(0));
+            }
+            else {
+                return Number(time.substring(0, 2));
+            }
+        }
+
+        function getMinutes(time) {
+            if (typeof time === "number") {
+                time = time + '';
+            }
+
+            if (time.length < 4) {
+                return Number(time.substring(1, 3));
+            }
+            else {
+                return Number(time.substring(2, 4));
+            }
+        }
+
+        function togglePopover(e) {
+            console.log(e);
+            $(e).popover('toggle');
+        }
+
+        function addTimeToHourDayCell(hourOfDay, dayOfWeek, startMinute, endMinute, courseTitle, color) {
+            if (typeof startMinute === "string") {
+                startMinute = Number(startMinute);
+            }
+
+            if (typeof endMinute === "string") {
+                endMinute = Number(endMinute);
+            }
+
+            var diff = endMinute - startMinute;
+            var id = dayOfWeek + hourOfDay + startMinute;
+
+            var time = document.createElement("div");
+            time.className = "timeCellItem";
+            time.style.height = diff + "px";
+            time.style.backgroundColor = color;
+            time.id = id;
+
+            if (diff >= 30 && courseTitle != null) {
+                time.textContent = courseTitle;
+            }
+
+            document.getElementById(hourOfDay + "row").querySelectorAll("td:nth-of-type(" + daysToNumsEnum[dayOfWeek] + ") div")[0].appendChild(time);
+
+            var originalOffset = $(document.getElementById(hourOfDay + "row").querySelectorAll("td:nth-of-type(" + daysToNumsEnum[dayOfWeek] + ") div")[0]).offset();
+
+            $("#" + id).offset({ top: originalOffset.top + startMinute, left: originalOffset.left })
+
+            return id;
+        }
+
+        $("#searchButton").on("click", function (e) {
+            e.preventDefault();
+
+            var buildingInput = $("#buildingInput").val().trim();
+            var roomInput = $("#buildingRoomInput").val().trim();
+
+            if (buildingInput != "" && roomInput != "") {
+                if (tsmap.hasOwnProperty(buildingInput)) {
+                    if (tsmap[buildingInput].hasOwnProperty(roomInput)) {
+                        var roomData = tsmap[buildingInput][roomInput];
+
+                        console.log(roomData);
+
+                        var roomDaysOfWeek = Object.keys(roomData);
+
+                        var courseColors = {};
+
+                        for (let i = 0; i < roomDaysOfWeek.length; i++) {
+                            var roomDayCoursesData = roomData[roomDaysOfWeek[i]];
+
+                            for (let x = 0; x < roomDayCoursesData.length; x++) {
+                                var startHour = getHour(roomDayCoursesData[x]["startTime"]);
+                                var startMinute = getMinutes(roomDayCoursesData[x]["startTime"]);
+                                var endHour = getHour(roomDayCoursesData[x]["endTime"]);
+                                var endMinute = getMinutes(roomDayCoursesData[x]["endTime"]);
+
+                                if (startHour < 6 || endHour < 6) {
+                                    console.log(">> Start or end hour is before 6am:");
+                                    console.log(roomDayCoursesData[x]);
+                                    continue;
+                                }
+
+                                var id = "";
+                                var color = "";
+
+                                if (courseColors.hasOwnProperty(roomDayCoursesData[x]["sln"])) {
+                                    color = courseColors[roomDayCoursesData[x]["sln"]];
+                                }
+                                else {
+                                    color = getRandomColorStepwise();
+                                    courseColors[roomDayCoursesData[x]["sln"]] = color;
+                                }
+
+                                for (let j = startHour; j <= endHour; j++) {
+                                    if (j == startHour) {
+                                        var title = null;
+
+                                        if (60 - startMinute > endMinute) {
+                                            title = roomDayCoursesData[x]["title"];
+                                        }
+
+                                        id = addTimeToHourDayCell(j, roomDaysOfWeek[i], startMinute, 60, title, color);
+                                    }
+                                    else if (j == endHour) {
+                                        id = addTimeToHourDayCell(j, roomDaysOfWeek[i], 0, endMinute, roomDayCoursesData[x]["title"], color);
+                                    }
+                                    else {
+                                        var title = null;
+
+                                        if (endMinute > 60 - startMinute) {
+                                            title = roomDayCoursesData[x]["title"];
+                                        }
+
+                                        id = addTimeToHourDayCell(j, roomDaysOfWeek[i], 0, 60, title, color);
+                                    }
+
+                                    if (id != undefined && id != null && id != "") {
+                                        $("#" + id).attr("data-container", "body");
+                                        $("#" + id).attr("data-toggle", "popover");
+                                        $("#" + id).attr("data-html", "true");
+                                        $("#" + id).attr("title", roomDayCoursesData[x]["title"]);
+
+                                        $("#" + id).attr("data-content", "<div><p>SLN: " + roomDayCoursesData[x]["sln"] + "</p><p>Alias: " + roomDayCoursesData[x]["alias"] + "</p><a target='_blank' href='" + roomDayCoursesData[x]["catalogURL"] + "'>Catalog URL</a></div>");
+
+                                        $("#" + id).on("mouseover", function (e) {
+                                            $(".popover").each(function () {
+                                                $(this).popover("hide");
+                                            });
+                                            $(e.target).popover('show');
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        $("html").on("mouseup", function (e) {
+            var l = $(e.target);
+            if (l[0].className.indexOf("popover") == -1) {
+                $(".popover").each(function () {
+                    $(this).popover("hide");
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

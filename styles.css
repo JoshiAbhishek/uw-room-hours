@@ -1,0 +1,35 @@
+.jumbotron {
+    border-radius: 0em !important;
+}
+
+tr.hourRow th {
+    padding-top: 18px !important;
+    padding-bottom: 0em !important;
+}
+
+tr.hourRow td {
+    padding: 0em !important;
+    height: 60px !important;
+}
+
+div.hourDayCell {
+    background-color: lightgray !important;
+    height: inherit;
+    padding: 0em !important;
+    margin: 0em !important;
+}
+
+.timeCellItem {
+    margin: 0em !important;
+    padding: 0em !important;
+    text-align: center !important;
+    font-weight: 600 !important;
+}
+
+label {
+    font-weight: 600 !important;
+}
+
+#weekTable {
+    background-color: #FFF;
+}
