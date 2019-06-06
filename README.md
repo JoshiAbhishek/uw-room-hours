@@ -27,10 +27,10 @@ TimeScheduleDataParser.exportTimeScheduleDataMappedToLocationFromFolder(DATA_EXP
 });
 ```
 
-3) Copy the JSON file's contents and set it equal to the "ts" variable in the *uw-room-hours* external javascript file
+3) Copy the JSON file's contents and set it equal to the "tsmap" variable in the *uw-room-hours* external javascript file
 
 ```javascript
-var ts = {...}
+var tsmap = {...}
 ```
 
 ## Terms & License
