@@ -35,6 +35,6 @@ var ts = {...}
 
 ## Terms & License
 
-This software is provided as is, with no guarantees of functionality. You assume liability for any of your own usage, modification, and / or distribution of any portion of this software. Any such actions relating to this software should comply with relevant laws and policies, including appropriate use of University of Washington services and data, as defined by Washington State and the [University of Washington](https://itconnect.uw.edu/work/appropriate-use/).
+This software is provided as is, with no guarantees of functionality. You assume full liability for any of your own usage, modification, and distribution of any portion of this software. All such actions relating to this software should comply with relevant laws and policies, including appropriate use of University of Washington services and data as defined by Washington State and the [University of Washington](https://itconnect.uw.edu/work/appropriate-use/).
 
 Licensed under the [GNU](./LICENSE) license. 
