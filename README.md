@@ -8,9 +8,9 @@ It's especially helpful for figuring out when and how long a room is open to use
 
 The following are the instructions for how to retrieve and add the properly formatted UW Seattle Time Schedule data needed for this tool:
 
-1) Install the [**uw-scrapers**](https://github.com/JoshiAbhishek/uw-scrapers) repository code, following its installation steps 
+1) Download and install the [**uw-scrapers**](https://github.com/JoshiAbhishek/uw-scrapers) repository code, following its installation steps 
 
-2) Run the following functions to scrape the UW Time Schedule for the given quarter, export the data, parse the exported files, and create a JSON file mapping buildings to rooms to days of the week to courses
+2) Run the following functions in the *uw-scrapers index.js* file to scrape the UW Time Schedule for the given quarter, export the data, parse the exported files, and create a JSON file mapping buildings to rooms to days of the week to courses
 
 ```javascript
 // Expose the extractCourseInfo function for use in the Puppeteer page instance
@@ -27,7 +27,7 @@ TimeScheduleDataParser.exportTimeScheduleDataMappedToLocationFromFolder(DATA_EXP
 });
 ```
 
-3) Copy the JSON file's contents and set it equal to the "ts" variable in the external javascript file
+3) Copy the JSON file's contents and set it equal to the "ts" variable in the *uw-building-hours* external javascript file
 
 ```javascript
 var ts = {...}
