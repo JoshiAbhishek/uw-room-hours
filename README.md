@@ -4,7 +4,7 @@
 
 It's especially helpful for figuring out when and how long a room is open to use for studying or working on homework. 
 
-> The uw-room-hours tool can be used at https://joshiabhishek.github.io/uw-room-hours/(https://joshiabhishek.github.io/uw-room-hours/) (Updated for Spring 2019)
+> The uw-room-hours tool can be accessed at [https://joshiabhishek.github.io/uw-room-hours/](https://joshiabhishek.github.io/uw-room-hours/) (Updated for Spring 2019)
 
 ## Get & Add Data
 
