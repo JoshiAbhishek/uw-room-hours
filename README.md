@@ -4,6 +4,8 @@
 
 It's especially helpful for figuring out when and how long a room is open to use for studying or working on homework. 
 
+> The uw-room-hours tool can be used at https://joshiabhishek.github.io/uw-room-hours/(https://joshiabhishek.github.io/uw-room-hours/) (Updated for Spring 2019)
+
 ## Get & Add Data
 
 The following are the instructions for how to retrieve and add the properly formatted UW Seattle Time Schedule data needed for this tool:
